@@ -74,7 +74,7 @@ class Producto
   end
 
   def to_s
-    "#{@nombre} #{@precio}"
+    "#{@nombre}"
   end
 
 end
@@ -98,7 +98,10 @@ class Promocion
   end
 
   def to_s
-    @nombre
+    #@nombre
+    salida = "Promocion("
+    salida += @unidades_de_compra.join("+")
+    salida+=") Descuento "
   end
 
 end
@@ -111,6 +114,10 @@ class PromocionConDescuentoFijo < Promocion
   def total
     super - @descuento
   end
+
+  def to_s
+    super + "$#{@descuento}"
+  end
 end
 
 class PromocionConDescuentoDePorcentaje < Promocion
@@ -119,6 +126,10 @@ class PromocionConDescuentoDePorcentaje < Promocion
   end
 
   def total
-    super - super*@descuento/100
+    super*(100-@descuento)/100
+  end
+
+  def to_s
+    super + "#{@descuento}%"
   end
 end
