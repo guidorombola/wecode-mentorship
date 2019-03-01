@@ -24,9 +24,7 @@ class Factura
   end
 
   def subtotal
-    subtotal = 0
-    @detalles.each { |detalle| subtotal += detalle.total }
-    subtotal
+    @detalles.sum(&:total)
   end
 
   def total
@@ -39,8 +37,8 @@ class Factura
 
   def to_s
     salida = "#{@nombre_comercio}\n\nCliente: #{@cliente}\n\n"
-    detalles.each { |detalle| salida += "#{detalle}"+"\n" }
-    salida += "-----------------\n\nSubtotal: #{subtotal}\nIVA(21%): #{iva}\nTotal: #{total}"
+    salida += detalles.join "\n"
+    salida += "\n-----------------\n\nSubtotal: #{subtotal}\nIVA(21%): #{iva}\nTotal: #{total}"
   end
 end
 
@@ -92,13 +90,11 @@ class Promocion
   end
 
   def agregar_unidad_de_compra(unidad_de_compra)
-    @unidades_de_compra.push(unidad_de_compra)
+    @unidades_de_compra << unidad_de_compra
   end
 
   def total
-    total = 0
-    @unidades_de_compra.each { |unidad| total += unidad.total }
-    total
+    @unidades_de_compra.sum(&:total)
   end
 
   def to_s
