@@ -9,7 +9,7 @@ class Cliente
   end
 
   def to_s
-    return "#{@nombre} #{@apellido}\nDireccion: #{@direccion}"
+    "#{@nombre} #{@apellido}\nDireccion: #{@direccion}"
   end
 end
 
@@ -23,20 +23,24 @@ class Factura
     @detalles = detalles
   end
 
-  def subtotal()
+  def subtotal
     subtotal = 0
-    @detalles.each { |detalle| subtotal += detalle.unidad_de_compra.total*detalle.cantidad }
-    return subtotal
+    @detalles.each { |detalle| subtotal += detalle.total }
+    subtotal
   end
 
-  def total()
-    return subtotal*1.21
+  def total
+    subtotal+iva
+  end
+
+  def iva
+    subtotal*0.21
   end
 
   def to_s
     salida = "#{@nombre_comercio}\n\nCliente: #{@cliente}\n\n"
     detalles.each { |detalle| salida += "#{detalle}"+"\n" }
-    salida += "-----------------\n\nSubtotal: #{subtotal}\nTotal: #{total}"
+    salida += "-----------------\n\nSubtotal: #{subtotal}\nIVA(21%): #{iva}\nTotal: #{total}"
   end
 end
 
@@ -49,12 +53,12 @@ class Detalle
     @cantidad = cantidad
   end
 
-  def total()
-    return unidad_de_compra.total*@cantidad
+  def total
+    unidad_de_compra.total*@cantidad
   end
 
   def to_s
-    return "Cantidad: #{@cantidad} Descripcion: #{@unidad_de_compra} Precio unitario: #{@unidad_de_compra.total} Precio: #{total}"
+    "Cantidad: #{@cantidad} Descripcion: #{@unidad_de_compra} Precio unitario: #{@unidad_de_compra.total} Precio: #{total}"
   end
 end
 
@@ -67,12 +71,12 @@ class Producto
     @precio = precio
   end
 
-  def total()
-    return @precio
+  def total
+    @precio
   end
 
   def to_s
-    return "#{@nombre} #{@precio}"
+    "#{@nombre} #{@precio}"
   end
 
 end
@@ -91,14 +95,14 @@ class Promocion
     @unidades_de_compra.push(unidad_de_compra)
   end
 
-  def total()
+  def total
     total = 0
     @unidades_de_compra.each { |unidad| total += unidad.total }
-    return total
+    total
   end
 
   def to_s
-    return @nombre
+    @nombre
   end
 
 end
@@ -108,8 +112,8 @@ class PromocionConDescuentoFijo < Promocion
     super
   end
 
-  def total()
-    return super - @descuento
+  def total
+    super - @descuento
   end
 end
 
@@ -118,7 +122,7 @@ class PromocionConDescuentoDePorcentaje < Promocion
     super
   end
 
-  def total()
-    return (super - super*@descuento/100)
+  def total
+    super - super*@descuento/100
   end
 end
