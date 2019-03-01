@@ -81,11 +81,10 @@ end
 
 class Promocion
 
-  attr_reader :nombre, :descuento, :unidades_de_compra
+  attr_reader :descuento, :unidades_de_compra
 
-  def initialize(nombre, descuento)
+  def initialize(descuento)
     @unidades_de_compra = []
-    @nombre = nombre
     @descuento = descuento
   end
 
@@ -98,7 +97,6 @@ class Promocion
   end
 
   def to_s
-    #@nombre
     salida = "Promocion("
     salida += @unidades_de_compra.join("+")
     salida+=") Descuento "
@@ -107,7 +105,7 @@ class Promocion
 end
 
 class PromocionConDescuentoFijo < Promocion
-  def initialize(nombre, monto)
+  def initialize(monto)
     super
   end
 
@@ -121,7 +119,7 @@ class PromocionConDescuentoFijo < Promocion
 end
 
 class PromocionConDescuentoDePorcentaje < Promocion
-  def initialize(nombre, porcentaje)
+  def initialize(porcentaje)
     super
   end
 
