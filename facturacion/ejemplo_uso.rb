@@ -7,9 +7,9 @@ fideos = Producto.new("Fideos", 40)
 jabon = Producto.new("Jabon", 100)
 pan = Producto.new("Pan", 50)
 
-promo_fija = PromocionConDescuentoFijo.new("Promo $30 dto comprando fideos y galletitas",30)
-promo_de_promos = PromocionConDescuentoFijo.new("Promocion de promociones", 10)
-promo_porcentaje = PromocionConDescuentoDePorcentaje.new("Promo 20% dto en fideos", 20)
+promo_fija = PromocionConDescuentoFijo.new(30)
+promo_de_promos = PromocionConDescuentoFijo.new(10)
+promo_porcentaje = PromocionConDescuentoDePorcentaje.new(20)
 
 promo_fija.agregar_unidad_de_compra(galletitas)
 promo_fija.agregar_unidad_de_compra(fideos)
