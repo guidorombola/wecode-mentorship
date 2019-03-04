@@ -1,6 +1,6 @@
 twitter
-.git
-.idea
-.docx
-.odt
-.pdf
+*.git
+*.idea
+*.docx
+*.odt
+*.pdf
