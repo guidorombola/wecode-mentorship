@@ -1,6 +1,6 @@
-twitter
 *.git
 *.idea
 *.docx
 *.odt
 *.pdf
+twitter/
